@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Enums\PaymentType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,11 @@ class OrderFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'payment' => fake()->randomElement(['Cash On Delivery', 'Card On Delivery', 'Card Payment']),
+            'payment' => fake()->randomElement([
+                PaymentType::CashOnDelivery,
+                PaymentType::CardOnDelivery,
+                PaymentType::CardPayment
+            ]),
             'shipping_address' => fake()->address(),
             'billing_address' => fake()->address()
         ];
